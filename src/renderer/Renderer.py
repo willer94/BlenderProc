@@ -22,6 +22,7 @@ class Renderer(Module):
        "resolution_x", "The render image width."
        "resolution_y", "The render image height."
        "pixel_aspect_x", "The aspect ratio to use for the camera viewport. Can be different from the resolution aspect ratio to distort the image."
+       "cycles_device_type", "Either CPU or GPU based rendering."
        "simplify_subdivision_render", "Global maximum subdivision level during rendering. Speeds up rendering."
 
        "samples", "Number of samples to render for each pixel."
@@ -78,7 +79,7 @@ class Renderer(Module):
             bpy.context.scene.render.use_simplify = True
             bpy.context.scene.render.simplify_subdivision_render = simplify_subdivision_render
 
-        bpy.context.scene.cycles.device = "GPU"
+        bpy.context.scene.cycles.device = self.config.get_string("cycles_device_type", "GPU")
         bpy.context.scene.cycles.glossy_bounces = self.config.get_int("glossy_bounces", 0)
         bpy.context.scene.cycles.ao_bounces_render = self.config.get_int("ao_bounces_render", 3)
         bpy.context.scene.cycles.max_bounces = self.config.get_int("max_bounces", 3)

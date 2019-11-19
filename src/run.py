@@ -1,4 +1,5 @@
 # blender --background --python run.py  -- <config> [<args>]
+
 import bpy
 import sys
 import os
