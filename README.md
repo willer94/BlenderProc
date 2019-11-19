@@ -1,4 +1,7 @@
 # BlenderProc
+
+__This branch is still in progress, we are in the process of integrating MacOSX support, not all features are support yet!__
+
 A procedural blender pipeline to generate images for deep learning
 
 The corresponding arxiv paper: https://arxiv.org/abs/1911.01911
