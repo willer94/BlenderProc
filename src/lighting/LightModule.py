@@ -41,7 +41,7 @@ class LightModule(Module):
         """
         # Create light data, link it to the new object
         light_data = bpy.data.lights.new(name="light", type="POINT")
-        light_obj = bpy.data.objects.new(name="light", object_data=light_data)
+        light_obj = bpy.data.objects.new(name="light", object_data=light_data)        
         bpy.context.collection.objects.link(light_obj)
 
         light_data.type = config.get_string("type", 'POINT')
@@ -49,5 +49,8 @@ class LightModule(Module):
         light_obj.rotation_euler = config.get_list("rotation", [0, 0, 0])
         light_data.energy = config.get_float("energy", 10)
         light_data.color = config.get_list("color", [1, 1, 1])
-        light_data.distance = config.get_float("distance", 0)
+        light_data.distance = config.get_float("distance", 25.)
 
+        print('light: ', light_data.type, light_obj.location, light_obj.rotation_euler, light_data.energy)
+        input()
+      

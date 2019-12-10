@@ -8,6 +8,8 @@ dir = "."  # From CLI
 if not dir in sys.path:
     sys.path.append(dir)
 
+from src.utility.Utility import Utility
+
 # Add path to custom packages inside the blender main directory
 sys.path.append(os.path.join(os.path.dirname(sys.executable), "custom-python-packages"))
 
