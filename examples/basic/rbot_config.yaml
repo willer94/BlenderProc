@@ -1,7 +1,6 @@
 # Args: <cam_file> <obj_file> <output_dir>
 {
-  "setup": {    
-    #"blender_version": "blender-2.80-linux-glibc217-x86_64",
+  "setup": {        
     "blender_install_path": "/home/willer/softwares",
     "blender_version": "blender-2.80-linux-glibc217-x86_64",
     "pip": [

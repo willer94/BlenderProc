@@ -1,6 +1,6 @@
 import argparse
 import os
-import urllib
+import urllib.request
 import tarfile
 import subprocess
 import shutil
@@ -47,7 +47,7 @@ if "custom_blender_path" not in setup_config:
         url = "https://download.blender.org/release/Blender" + major_version + "/" + blender_version + ".tar.bz2"
 
         print("Downloading blender from " + url)
-        file_tmp = urllib.urlretrieve(url, filename=None)[0]
+        file_tmp = urllib.request.urlretrieve(url, filename=None)[0]
 
         tar = tarfile.open(file_tmp)
         tar.extractall(blender_install_path)
