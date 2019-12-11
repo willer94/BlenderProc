@@ -51,6 +51,6 @@ class LightModule(Module):
         light_data.color = config.get_list("color", [1, 1, 1])
         light_data.distance = config.get_float("distance", 25.)
 
-        print('light: ', light_data.type, light_obj.location, light_obj.rotation_euler, light_data.energy)
-        input()
+        # print('light: ', light_data.type, light_obj.location, light_obj.rotation_euler, light_data.energy)
+        # input()
       

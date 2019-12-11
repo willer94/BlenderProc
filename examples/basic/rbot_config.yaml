@@ -27,51 +27,28 @@
         "axis_up": "-Y"
       }
     },
-    # {
-    #   "name": "lighting.LightSampler",
-    #   "config": {
-    #     "lights": [
-    #       {            
-    #         "location": {
-    #           "name": "ShellSampler",
-    #           "parameters": {
-    #             "center": [0, 0, 0],
-    #             "radius_min": 40,
-    #             "radius_max": 70,
-    #             "elevation_min": 15,
-    #             "elevation_max": 70
-    #           },
-    #         },
-    #         "type": "POINT",
-    #         "energy": 2000,
-    #         "color": [255, 255, 255],
-    #       }           
-    #     ]
-    #   }
-    # },    
-    # {
-    #   "name": "lighting.LightLoader",
-    #   "config": {
-    #     "lights": [
-    #       {
-    #         "type": "POINT",
-    #         "path": "<args:3>",
-    #         "file_format": "location rotation color",            
-    #         "energy": 1000,            
-    #       },          
-    #     ]
-    #   }
-    # },
     {
       "name": "lighting.LightLoader",
       "config": {
         "lights": [
+          # {
+          #   "type": "POINT",
+          #   "location": [0, 60, 60],
+          #   "energy": 4000,            
+          #   "color": [255, 255, 255]
+          # },
           {
             "type": "SUN",
-            "location": [0, 60, 60],
+            "location": [0, -60, 60],
             "energy": 1,            
-            "color": [255, 255, 255]
-          }
+            "color": [10, 10, 10]
+          },
+          # {
+          #   "type": "POINT",
+          #   "location": [0, 60, -60],
+          #   "energy": 1,            
+          #   "color": [255, 255, 255]
+          # }
         ]
       }
     },

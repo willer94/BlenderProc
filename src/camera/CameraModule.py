@@ -51,6 +51,27 @@ class CameraModule(Module):
         cam_ob.keyframe_insert(data_path='location', frame=frame_id)
         cam_ob.keyframe_insert(data_path='rotation_euler', frame=frame_id)
 
+    def _insert_light_key_frames(self, lights, frame_id):
+        for l_ob in lights:
+            l = l_ob.data                  
+            theta, rho = np.random.rand()*np.pi*2, np.random.rand()*np.pi/2                                
+            posi = mathutils.Vector((200*np.cos(rho)*np.sin(theta),
+                                     200*np.cos(rho)*np.cos(theta),
+                                     200*np.sin(rho)
+                                    ))
+            target = mathutils.Vector((0, 0, 0))
+            direction = target - posi
+            quat= direction.to_track_quat('-Z', 'Y')
+            euler = quat.to_euler()
+            l_ob.location, l_ob.rotation_euler = posi, euler           
+
+            l_ob.keyframe_insert(data_path='location', frame=frame_id)          
+            l_ob.keyframe_insert(data_path='rotation_euler', frame=frame_id)
+
+            color = l.color            
+            l.color += mathutils.Color(np.random.randint(-2, 2, (3,1)))
+            l.keyframe_insert(data_path='color', frame=frame_id)
+
     def _add_cam_pose(self, config):
         """ Adds a new cam pose according to the given configuration.
 
@@ -98,4 +119,12 @@ class CameraModule(Module):
         # Store new cam pose as next frame
         frame_id = bpy.context.scene.frame_end
         self._insert_key_frames(cam, cam_ob, frame_id)
+
+        lights = []
+        for obj in bpy.context.collection.objects:
+            if 'light' in obj.name:
+                lights.append(obj)
+        self._insert_light_key_frames(lights, frame_id)
+        #input()        
+
         bpy.context.scene.frame_end = frame_id + 1
