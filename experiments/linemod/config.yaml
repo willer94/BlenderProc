@@ -20,11 +20,9 @@
       "config": {}
     },
     {
-      "name": "loader.ObjLoader",
+      "name": "loader.PlyLoader",
       "config": {
-        "path": "<args:1>",
-        "axis_forward": "-Z",
-        "axis_up": "Y"
+        "path": "<args:1>"
       }
     },
     {
