@@ -1,0 +1,74 @@
+# Args: <cam_file> <obj_file> <output_dir>
+{
+  "setup": {        
+    "blender_install_path": "/home/willer/softwares",
+    "blender_version": "blender-2.80-linux-glibc217-x86_64",
+    "pip": [
+      "h5py",
+      "imageio"
+    ]
+  },
+  "global": {
+    "all": {
+      "output_dir": "<args:2>",
+      #"output_is_temp": False
+    }
+  },
+  "modules": [
+    {
+      "name": "main.Initializer",
+      "config": {}
+    },
+    {
+      "name": "loader.PlyLoader",
+      "config": {
+        "path": "<args:1>"
+      }
+    },
+    {
+      "name": "lighting.LightLoader",
+      "config": {
+        "lights": [
+          {
+            "type": "SUN",
+            "location": [0, -0.4, 0.4],
+            "energy": 1,            
+            "color": [10, 10, 10]
+          },          
+        ]
+      }
+    },
+    {
+      "name": "camera.CameraLoader",
+      "config": {
+        "path": "<args:0>",
+        "file_format": "location rotation",
+        "default_cam_param": {
+          "fov": 1,
+        }
+      }
+    },
+    {
+      "name": "renderer.RgbRenderer",
+      "config": {
+        "output_key": "colors",
+        "samples": 350,
+        "resolution_x": 224,
+        "resolution_y": 224,
+      }
+    },
+    {
+      "name": "renderer.NormalRenderer",
+      "config": {
+        "output_key": "normals",
+        "resolution_x": 224,
+        "resolution_y": 224,
+      }
+    },
+    {
+      "name": "writer.Hdf5Writer",
+      "config": {
+      }
+    },
+  ]
+}
