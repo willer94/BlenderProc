@@ -1,6 +1,12 @@
 from src.main.Module import Module
 import bpy
 
+def add_shader_on_world():
+    bpy.data.worlds['World'].use_nodes = True
+    env_node = bpy.data.worlds['World'].node_tree.nodes.new(type='ShaderNodeTexEnvironment')
+    back_node = bpy.data.worlds['World'].node_tree.nodes['Background']
+    bpy.data.worlds['World'].node_tree.links.new(env_node.outputs['Color'], back_node.inputs['Color'])
+
 class Initializer(Module):
     """ Does some basic initialization of the blender project.
 
@@ -31,9 +37,10 @@ class Initializer(Module):
                 d.use = True
 
         # Set background color
-        world = bpy.data.worlds['World']
-        #world.color[:3] = self.config.get_list("horizon_color", [0.535, 0.633, 0.608])
-        world.color[:3] = self.config.get_list("horizon_color", [0., 0., 0.])
+        # world = bpy.data.worlds['World']
+        # world.color[:3] = self.config.get_list("horizon_color", [0.535, 0.633, 0.608])
+        # world.color[:3] = self.config.get_list("horizon_color", [0., 0., 0.])
+        add_shader_on_world()
 
         # Create the cam
         cam = bpy.data.cameras.new("Camera")

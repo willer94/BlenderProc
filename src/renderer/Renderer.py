@@ -125,6 +125,12 @@ class Renderer(Module):
 
         bpy.context.scene.render.filepath = os.path.join(self._determine_output_dir(), self.config.get_string("output_file_prefix", default_prefix))
 
+        # overlay an background image and place the object
+        img_path = '/media/willer/BackUp/datasets/rbot_models/ape/ape_tex.png'
+        img_name = os.path.basename(img_path)
+        bpy.data.images.load(img_path)
+        bpy.data.worlds['World'].node_tree.nodes['Environment Texture'].image = bpy.data.images[img_name]
+
         # Skip if there is nothing to render
         if bpy.context.scene.frame_end != bpy.context.scene.frame_start:
             # As frame_end is pointing to the next free frame, decrease it by one, as blender will render all frames in [frame_start, frame_ned]
@@ -132,6 +138,7 @@ class Renderer(Module):
             bpy.ops.render.render(animation=True, write_still=True)
             # Revert changes
             bpy.context.scene.frame_end += 1
+        bpy.data.images.remove(bpy.data.images[img_name])
 
     def _register_output(self, default_prefix, default_key, suffix, version, unique_for_camposes = True):
         """ Registers new output type using configured key and file prefix.
