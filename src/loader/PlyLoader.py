@@ -3,6 +3,9 @@ import bpy
 import mathutils
 import os
 from math import radians
+import numpy as np
+from .add_shader import add_shader_on_ply_object
+
 
 class PlyLoader(Module):
 
@@ -27,3 +30,9 @@ class PlyLoader(Module):
         if self.config.get_bool('use_smooth_shading', False):
             for poly in bpy.data.objects['mesh'].data.polygons:
                 poly.use_smooth = True
+
+        for obj in bpy.data.objects:
+            if obj.type == 'MESH':                                       
+                material = add_shader_on_ply_object(obj)
+                nodes = material.node_tree.nodes
+                nodes['Glossy BSDF'].inputs['Roughness'].default_value = np.random.uniform(0.8, 1)
