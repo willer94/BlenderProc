@@ -26,3 +26,8 @@ class ObjLoader(Module):
                                  axis_forward = self.config.get_string("axis_forward", "-Z"),
                                  axis_up      = self.config.get_string("axis_up", "Y") 
                                  )
+        bpy.context.scene.tool_settings.lock_object_mode = False 
+        for obj in bpy.data.objects:
+            if obj.type == 'MESH':                                        
+                bpy.context.view_layer.objects.active = obj #相当于鼠标左键选中
+                bpy.ops.object.mode_set(mode='TEXTURE_PAINT') #切换为pose更改模式

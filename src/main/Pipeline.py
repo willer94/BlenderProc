@@ -2,7 +2,8 @@
 from src.utility.ConfigParser import ConfigParser
 from src.utility.Utility import Utility
 import bpy
-
+        
+        
 class Pipeline:
 
     def __init__(self, config_path, args, working_dir, should_perform_clean_up=True):
@@ -16,6 +17,7 @@ class Pipeline:
         config = config_parser.parse(Utility.resolve_path(config_path), args)
 
         self.modules = Utility.initialize_modules(config["modules"], config["global"])
+
 
     def _cleanup(self):
         """ Cleanup the scene by removing objects, orphan data and custom properties """

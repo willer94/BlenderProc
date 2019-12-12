@@ -3,6 +3,7 @@ import bpy
 import sys
 import os
 
+
 # Make sure the current script directory is in PATH, so we can load other python modules
 dir = "."  # From CLI
 if not dir in sys.path:

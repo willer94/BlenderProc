@@ -69,7 +69,7 @@ class CameraModule(Module):
             l_ob.keyframe_insert(data_path='rotation_euler', frame=frame_id)
 
             color = l.color            
-            l.color += mathutils.Color(np.random.randint(-2, 2, (3,1)))
+            #l.color += mathutils.Color(np.random.randint(-2, 2, (3,1)))
             l.keyframe_insert(data_path='color', frame=frame_id)
 
     def _add_cam_pose(self, config):
