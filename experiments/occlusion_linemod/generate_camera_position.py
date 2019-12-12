@@ -10,9 +10,10 @@ yaw_range   = [0, np.pi*2]
 pitch_range = [0, np.pi/2]
 roll_range  = [0, np.pi*2]
 
-yaw_num   = 10
-pitch_num = 10
-roll_num  = 10	
+sample_num = 5
+yaw_num   = sample_num
+pitch_num = sample_num
+roll_num  = sample_num
 
 yaws = np.random.uniform(*yaw_range, yaw_num)
 pitchs = np.random.uniform(*pitch_range, pitch_num)

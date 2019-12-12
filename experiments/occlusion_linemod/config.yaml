@@ -20,11 +20,11 @@
       "config": {}
     },
     {
-      "name": "loader.ObjLoader",
+      "name": "loader.PlyLoader",
       "config": {
         "path": "<args:1>",
-        "axis_forward": "-Z",
-        "axis_up": "-Y"
+        # "axis_forward": "-Z",
+        # "axis_up": "-Y"
       }
     },
     {
@@ -51,18 +51,18 @@
       }
     },
     {
-      "name": "renderer.RgbRenderer",
+      "name": "renderer.NormalRenderer",
       "config": {
-        "output_key": "colors",
-        "samples": 350,
+        "output_key": "normals",
         "resolution_x": 224,
         "resolution_y": 224,
       }
     },
     {
-      "name": "renderer.NormalRenderer",
+      "name": "renderer.RgbRenderer",
       "config": {
-        "output_key": "normals",
+        "output_key": "colors",
+        "samples": 350,
         "resolution_x": 224,
         "resolution_y": 224,
       }
