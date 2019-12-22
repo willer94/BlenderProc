@@ -132,8 +132,7 @@ class Renderer(Module):
             bpy.ops.render.render(animation=True, write_still=True)
             # Revert changes
             bpy.context.scene.frame_end += 1
-        bpy.data.images.remove(bpy.data.images[img_name])
-
+        
     def _register_output(self, default_prefix, default_key, suffix, version, unique_for_camposes = True):
         """ Registers new output type using configured key and file prefix.
 

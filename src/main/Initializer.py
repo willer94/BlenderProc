@@ -36,7 +36,7 @@ class Initializer(Module):
             for d in group:
                 d.use = True
 
-        Set background color
+        #Set background color
         world = bpy.data.worlds['World']
         world.color[:3] = self.config.get_list("horizon_color", [0.535, 0.633, 0.608])
         world.color[:3] = self.config.get_list("horizon_color", [0., 0., 0.])

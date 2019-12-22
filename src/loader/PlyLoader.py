@@ -5,7 +5,7 @@ import os
 from math import radians
 import numpy as np
 from .add_shader import add_shader_on_ply_object
-
+from src.utility.Utility import Utility
 
 class PlyLoader(Module):
 
@@ -17,17 +17,12 @@ class PlyLoader(Module):
 
         """
         if not self.config.get_bool('is_replica_object', False):
-            bpy.ops.import_mesh.ply(filepath=self.config.get_string("path")
-                                    axis_forward = self.config.get_string("axis_forward", "-Z"),
-                                    axis_up      = self.config.get_string("axis_up", "Y") 
-                                    )
+
+            bpy.ops.import_mesh.ply(filepath = Utility.resolve_path(self.config.get_string("path")))
         else:
             file_path = os.path.join(self.config.get_string('data_path'), self.config.get_string('data_set_name'), 'mesh.ply')
             if os.path.exists(file_path):
-                bpy.ops.import_mesh.ply(filepath=file_path
-                                        axis_forward = self.config.get_string("axis_forward", "-Z"),
-                                        axis_up      = self.config.get_string("axis_up", "Y") 
-                                        )
+                bpy.ops.import_mesh.ply(filepath=file_path)
             else:
                 raise Exception("The filepath is not known: {}".format(file_path))
         if self.config.get_bool('use_ambient_occlusion', False):
@@ -37,18 +32,18 @@ class PlyLoader(Module):
             for poly in bpy.data.objects['mesh'].data.polygons:
                 poly.use_smooth = True
 
-        for obj in bpy.data.objects:
-            if obj.type == 'MESH':                                       
-                material = add_shader_on_ply_object(obj)
-                nodes = material.node_tree.nodes
-                nodes['Glossy BSDF'].inputs['Roughness'].default_value = np.random.uniform(0.8, 1)
+        # for obj in bpy.data.objects:
+        #     if obj.type == 'MESH':                                       
+        #         material = add_shader_on_ply_object(obj)
+        #         nodes = material.node_tree.nodes
+        #         nodes['Glossy BSDF'].inputs['Roughness'].default_value = np.random.uniform(0.8, 1)
 
         cur_obj = bpy.context.selected_objects[-1]
-        mat = cur_obj.data.materials.get("Material")
-        if mat is None:
-            # mat = self.add_shader_on_ply_object(cur_obj)
-            mat = self._load_materials
-            self._link_col_node(mat) 
+        #mat = cur_obj.data.materials.get("Material")
+        #if mat is None:
+        mat = self.add_shader_on_ply_object(cur_obj)
+        #mat = self._load_materials
+        self._link_col_node(mat) 
 
 
     def add_shader_on_ply_object(self, obj):
