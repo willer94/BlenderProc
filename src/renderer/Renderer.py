@@ -41,7 +41,7 @@ class Renderer(Module):
     def __init__(self, config):
         Module.__init__(self, config)
         addon_utils.enable("render_auto_tile_size")
-
+        
     def _configure_renderer(self, default_samples=256):
         """
          Sets many different render parameters which can be adjusted via the config.
@@ -124,13 +124,7 @@ class Renderer(Module):
             self._write_depth_to_file()
 
         bpy.context.scene.render.filepath = os.path.join(self._determine_output_dir(), self.config.get_string("output_file_prefix", default_prefix))
-
-        # overlay an background image and place the object
-        img_path = '/media/willer/BackUp/datasets/rbot_models/ape/ape_tex.png'
-        img_name = os.path.basename(img_path)
-        bpy.data.images.load(img_path)
-        bpy.data.worlds['World'].node_tree.nodes['Environment Texture'].image = bpy.data.images[img_name]
-
+        
         # Skip if there is nothing to render
         if bpy.context.scene.frame_end != bpy.context.scene.frame_start:
             # As frame_end is pointing to the next free frame, decrease it by one, as blender will render all frames in [frame_start, frame_ned]
