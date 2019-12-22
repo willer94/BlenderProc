@@ -114,7 +114,7 @@ class Hdf5Writer(Module):
         :param file_path: The path to the image.
         :return: The numpy array
         """
-        return imageio.imread(file_path)[:, :, :3]
+        return imageio.imread(file_path)
 
     def _load_npy(self, file_path):
         """ Load the npy/npz file at the given path.

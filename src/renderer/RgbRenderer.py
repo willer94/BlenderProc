@@ -17,7 +17,9 @@ class RgbRenderer(Renderer):
             self._configure_renderer()
 
             # In case a previous renderer changed these settings
-            bpy.context.scene.render.image_settings.color_mode = "RGB"
+            bpy.context.scene.render.film_transparent = True
+            bpy.context.scene.render.image_settings.color_mode = 'RGBA'
+            #bpy.context.scene.render.image_settings.color_mode = "RGB"
             bpy.context.scene.render.image_settings.file_format = "PNG"
             bpy.context.scene.render.image_settings.color_depth = "8"            
 
